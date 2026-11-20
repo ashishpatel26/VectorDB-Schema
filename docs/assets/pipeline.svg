@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" role="img" aria-labelledby="t d">
+  <title id="t">Ingestion pipeline, fail closed</title>
+  <desc id="d">Documents flow from Word/PDF sources through LangChain loading, cleaning, gates, redaction, section-aware chunking, embedding, Pydantic validation, staging, promotion, safe search and verification. Documents that fail a gate or validation are sent to quarantine.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a1120"/><stop offset="1" stop-color="#0f1d33"/></linearGradient>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#4b6a93"/></marker>
+    <marker id="ahr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#f87171"/></marker>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#94a3b8" fill-opacity="0.10"/></pattern>
+  </defs>
+  <style>
+    .bx{fill:#111c30;stroke:#2b3d5f;stroke-width:1.5;animation:hl 4.0s ease-out infinite}
+    @keyframes hl{0%{fill:#15324d;stroke:#67e8f9;stroke-width:2.5}35%{fill:#111c30;stroke:#2b3d5f;stroke-width:1.5}100%{fill:#111c30;stroke:#2b3d5f;stroke-width:1.5}}
+    .belt{stroke-dasharray:6 8;animation:belt 1.2s linear infinite}
+    @keyframes belt{to{stroke-dashoffset:-14}}
+    .rej{stroke-dasharray:5 6;animation:belt 1.2s linear infinite}
+    .f1{opacity:0;animation:fg 12s linear 1s infinite}
+    .f2{opacity:0;animation:fv 12s linear 3s infinite}
+    .q1{opacity:0;animation:fq1 12s linear 1s infinite}
+    .q2{opacity:0;animation:fq2 12s linear 3s infinite}
+    @keyframes fg{0%,21.0%{opacity:0}23.0%{opacity:1}32.0%{opacity:0}100%{opacity:0}}
+    @keyframes fv{0%,62.8%{opacity:0}64.8%{opacity:1}73.8%{opacity:0}100%{opacity:0}}
+    @keyframes fq1{0%,39.4%{opacity:0}41.4%{opacity:1}50.4%{opacity:0}100%{opacity:0}}
+    @keyframes fq2{0%,88.5%{opacity:0}90.5%{opacity:1}99.5%{opacity:0}100%{opacity:0}}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+  <rect x="4" y="4" width="1192" height="492" rx="18" fill="url(#bg)" stroke="#26385a" stroke-width="1.5"/>
+  <rect x="5" y="5" width="1190" height="490" rx="17" fill="url(#dots)"/>
+
+  <text x="40" y="48" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="26" font-weight="800" fill="#f1f5f9">Ingestion pipeline <tspan fill="#5eead4">· fail closed</tspan></text>
+  <text x="40" y="78" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#94a3b8">Every Word/PDF is loaded, gated, chunked, embedded and validated, or it goes to quarantine. Search only sees promoted chunks.</text>
+
+  <!-- conveyor -->
+  <path class="belt" d="M120 104 H1172 V436 H120" fill="none" stroke="#2a4a72" stroke-width="2"/>
+  <!-- reject routes -->
+  <g fill="none" stroke="#f87171" stroke-width="2" stroke-opacity="0.75">
+    <path class="rej" d="M696 200 V250 H294" marker-end="url(#ahr)"/>
+    <path class="rej" d="M888 200 V250 H700"/>
+    <path class="rej" d="M888 340 V290 H294" marker-end="url(#ahr)"/>
+  </g>
+  <text x="470" y="243" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#fca5a5" text-anchor="middle">gate / sensitive-scan reject</text>
+  <text x="470" y="316" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#fca5a5" text-anchor="middle">schema-validation reject</text>
+
+  <!-- quarantine -->
+  <g>
+    <rect x="40" y="226" width="250" height="84" rx="12" fill="#241018" stroke="#f87171" stroke-width="1.5"/>
+    <rect class="q1" x="40" y="226" width="250" height="84" rx="12" fill="#f87171" fill-opacity="0.22" stroke="#fecaca" stroke-width="2.5"/>
+    <rect class="q2" x="40" y="226" width="250" height="84" rx="12" fill="#f87171" fill-opacity="0.22" stroke="#fecaca" stroke-width="2.5"/>
+    <text x="165" y="260" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="19" font-weight="800" letter-spacing="2" fill="#f87171">QUARANTINE</text>
+    <text x="165" y="287" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#fecaca">logged, never dropped</text>
+  </g>
+
+  <g fill="none" stroke="#4b6a93" stroke-width="2">
+    <path d="M202 160 H228" marker-end="url(#ah)"/><path d="M394 160 H420" marker-end="url(#ah)"/><path d="M586 160 H612" marker-end="url(#ah)"/><path d="M778 160 H804" marker-end="url(#ah)"/><path d="M970 160 H996" marker-end="url(#ah)"/><path d="M998 380 H972" marker-end="url(#ah)"/><path d="M806 380 H780" marker-end="url(#ah)"/><path d="M614 380 H588" marker-end="url(#ah)"/><path d="M422 380 H396" marker-end="url(#ah)"/><path d="M230 380 H204" marker-end="url(#ah)"/><path d="M1080 204 V334" marker-end="url(#ah)"/>
+  </g>
+  
+    <g>
+      <rect class="bx" x="42.0" y="120" width="156" height="80" rx="12" style="animation-delay:0.00s"/>
+      <rect x="42.0" y="120" width="4" height="80" rx="2" fill="#2dd4bf"/>
+      <text x="120" y="148" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="1" fill="#2dd4bf">SOURCE</text>
+      <text x="120" y="172" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">Word · PDF</text>
+      <text x="120" y="191" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">+ manifest.jsonl</text>
+    </g>
+    <g>
+      <rect class="bx" x="234.0" y="120" width="156" height="80" rx="12" style="animation-delay:0.88s"/>
+      <rect x="234.0" y="120" width="4" height="80" rx="2" fill="#2dd4bf"/>
+      <text x="312" y="148" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="1" fill="#2dd4bf">LOAD</text>
+      <text x="312" y="172" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">LangChain</text>
+      <text x="312" y="191" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">PyPDF · Docx2txt</text>
+    </g>
+    <g>
+      <rect class="bx" x="426.0" y="120" width="156" height="80" rx="12" style="animation-delay:1.76s"/>
+      <rect x="426.0" y="120" width="4" height="80" rx="2" fill="#2dd4bf"/>
+      <text x="504" y="148" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="1" fill="#2dd4bf">CLEAN</text>
+      <text x="504" y="172" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">strip headers,</text>
+      <text x="504" y="191" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">footers, banners</text>
+    </g>
+    <g>
+      <rect class="bx" x="618.0" y="120" width="156" height="80" rx="12" style="animation-delay:2.64s"/>
+      <rect x="618.0" y="120" width="4" height="80" rx="2" fill="#fbbf24"/>
+      <text x="696" y="148" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="1" fill="#fbbf24">GATES</text>
+      <text x="696" y="172" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">source · purpose</text>
+      <text x="696" y="191" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">class · ACL · TTL</text>
+    </g>
+    <g>
+      <rect class="bx" x="810.0" y="120" width="156" height="80" rx="12" style="animation-delay:3.52s"/>
+      <rect x="810.0" y="120" width="4" height="80" rx="2" fill="#fbbf24"/>
+      <text x="888" y="148" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="1" fill="#fbbf24">REDACT</text>
+      <text x="888" y="172" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">reject SSN/card</text>
+      <text x="888" y="191" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">mask email/phone</text>
+    </g>
+    <g>
+      <rect class="bx" x="1002.0" y="120" width="156" height="80" rx="12" style="animation-delay:4.40s"/>
+      <rect x="1002.0" y="120" width="4" height="80" rx="2" fill="#38bdf8"/>
+      <text x="1080" y="148" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="1" fill="#38bdf8">CHUNK</text>
+      <text x="1080" y="172" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">section-aware</text>
+      <text x="1080" y="191" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">400 / 40 overlap</text>
+    </g>
+    <g>
+      <rect class="bx" x="1002.0" y="340" width="156" height="80" rx="12" style="animation-delay:6.77s"/>
+      <rect x="1002.0" y="340" width="4" height="80" rx="2" fill="#38bdf8"/>
+      <text x="1080" y="368" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="1" fill="#38bdf8">EMBED</text>
+      <text x="1080" y="392" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">bge-small 384d</text>
+      <text x="1080" y="411" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">cached by hash</text>
+    </g>
+    <g>
+      <rect class="bx" x="810.0" y="340" width="156" height="80" rx="12" style="animation-delay:7.65s"/>
+      <rect x="810.0" y="340" width="4" height="80" rx="2" fill="#fbbf24"/>
+      <text x="888" y="368" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="1" fill="#fbbf24">VALIDATE</text>
+      <text x="888" y="392" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">Pydantic v2</text>
+      <text x="888" y="411" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">base + industry</text>
+    </g>
+    <g>
+      <rect class="bx" x="618.0" y="340" width="156" height="80" rx="12" style="animation-delay:8.53s"/>
+      <rect x="618.0" y="340" width="4" height="80" rx="2" fill="#a78bfa"/>
+      <text x="696" y="368" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="1" fill="#a78bfa">STAGE</text>
+      <text x="696" y="392" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">status = staged</text>
+      <text x="696" y="411" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">not searchable</text>
+    </g>
+    <g>
+      <rect class="bx" x="426.0" y="340" width="156" height="80" rx="12" style="animation-delay:9.41s"/>
+      <rect x="426.0" y="340" width="4" height="80" rx="2" fill="#a78bfa"/>
+      <text x="504" y="368" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="1" fill="#a78bfa">PROMOTE</text>
+      <text x="504" y="392" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">staged → active</text>
+      <text x="504" y="411" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">alias {industry}</text>
+    </g>
+    <g>
+      <rect class="bx" x="234.0" y="340" width="156" height="80" rx="12" style="animation-delay:10.29s"/>
+      <rect x="234.0" y="340" width="4" height="80" rx="2" fill="#34d399"/>
+      <text x="312" y="368" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="1" fill="#34d399">SEARCH</text>
+      <text x="312" y="392" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">safe_search()</text>
+      <text x="312" y="411" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">pre-filter in DB</text>
+    </g>
+    <g>
+      <rect class="bx" x="42.0" y="340" width="156" height="80" rx="12" style="animation-delay:11.17s"/>
+      <rect x="42.0" y="340" width="4" height="80" rx="2" fill="#34d399"/>
+      <text x="120" y="368" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="1" fill="#34d399">VERIFY</text>
+      <text x="120" y="392" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">isolation · purge</text>
+      <text x="120" y="411" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">supersede · metrics</text>
+    </g>
+  <!-- red flash overlays on the rejecting stages -->
+  <rect class="f1" x="618.0" y="120" width="156" height="80" rx="12" fill="#f87171" fill-opacity="0.18" stroke="#f87171" stroke-width="2.5"/>
+  <rect class="f2" x="810.0" y="340" width="156" height="80" rx="12" fill="#f87171" fill-opacity="0.18" stroke="#f87171" stroke-width="2.5"/>
+
+  <!-- documents -->
+  
+    <g opacity="0"><rect x="-8" y="-10" width="16" height="20" rx="2.5" fill="#5eead4"/><path d="M-4 -4 h8 M-4 0 h8 M-4 4 h5" stroke="#0b1220" stroke-width="1.6"/>
+      <animateMotion dur="12s" begin="0s" repeatCount="indefinite" path="M120 104 H1172 V436 H120" keyPoints="0;1;1" keyTimes="0;0.931;1" calcMode="linear"/>
+      <animate attributeName="opacity" dur="12s" begin="0s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.02;0.921;0.951;1"/>
+    </g>
+    <g opacity="0"><rect x="-8" y="-10" width="16" height="20" rx="2.5" fill="#5eead4"/><path d="M-4 -4 h8 M-4 0 h8 M-4 4 h5" stroke="#0b1220" stroke-width="1.6"/>
+      <animateMotion dur="12s" begin="4s" repeatCount="indefinite" path="M120 104 H1172 V436 H120" keyPoints="0;1;1" keyTimes="0;0.931;1" calcMode="linear"/>
+      <animate attributeName="opacity" dur="12s" begin="4s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.02;0.921;0.951;1"/>
+    </g>
+    <g opacity="0"><rect x="-8" y="-10" width="16" height="20" rx="2.5" fill="#5eead4"/><path d="M-4 -4 h8 M-4 0 h8 M-4 4 h5" stroke="#0b1220" stroke-width="1.6"/>
+      <animateMotion dur="12s" begin="8s" repeatCount="indefinite" path="M120 104 H1172 V436 H120" keyPoints="0;1;1" keyTimes="0;0.931;1" calcMode="linear"/>
+      <animate attributeName="opacity" dur="12s" begin="8s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.02;0.921;0.951;1"/>
+    </g>
+  
+    <g opacity="0"><rect x="-8" y="-10" width="16" height="20" rx="2.5" fill="#f87171"/><path d="M-3.5 -3.5 l7 7 M3.5 -3.5 l-7 7" stroke="#2a1218" stroke-width="2"/>
+      <animateMotion dur="12s" begin="1s" repeatCount="indefinite" path="M120 104 H696" keyPoints="0;1;1" keyTimes="0;0.220;1" calcMode="linear"/>
+      <animate attributeName="opacity" dur="12s" begin="1s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.02;0.220;0.230;1"/>
+    </g>
+    <g opacity="0"><rect x="-8" y="-10" width="16" height="20" rx="2.5" fill="#f87171"/><path d="M-3.5 -3.5 l7 7 M3.5 -3.5 l-7 7" stroke="#2a1218" stroke-width="2"/>
+      <animateMotion dur="12s" begin="1s" repeatCount="indefinite" path="M696 200 V250 H300" keyPoints="0;0;1;1" keyTimes="0;0.230;0.404;1" calcMode="linear"/>
+      <animate attributeName="opacity" dur="12s" begin="1s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.228;0.230;0.444;0.474;1"/>
+    </g>
+    <g opacity="0"><rect x="-8" y="-10" width="16" height="20" rx="2.5" fill="#f87171"/><path d="M-3.5 -3.5 l7 7 M3.5 -3.5 l-7 7" stroke="#2a1218" stroke-width="2"/>
+      <animateMotion dur="12s" begin="3s" repeatCount="indefinite" path="M120 104 H1172 V436 H888" keyPoints="0;1;1" keyTimes="0;0.638;1" calcMode="linear"/>
+      <animate attributeName="opacity" dur="12s" begin="3s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.02;0.638;0.648;1"/>
+    </g>
+    <g opacity="0"><rect x="-8" y="-10" width="16" height="20" rx="2.5" fill="#f87171"/><path d="M-3.5 -3.5 l7 7 M3.5 -3.5 l-7 7" stroke="#2a1218" stroke-width="2"/>
+      <animateMotion dur="12s" begin="3s" repeatCount="indefinite" path="M888 340 V290 H300" keyPoints="0;0;1;1" keyTimes="0;0.648;0.895;1" calcMode="linear"/>
+      <animate attributeName="opacity" dur="12s" begin="3s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.646;0.648;0.935;0.965;1"/>
+    </g>
+
+  <!-- legend -->
+  <g font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif" font-size="16" fill="#cbd5e1">
+    <g transform="translate(52 470)"><rect x="-8" y="-10" width="16" height="20" rx="2.5" fill="#5eead4"/><path d="M-4 -4 h8 M-4 0 h8 M-4 4 h5" stroke="#0b1220" stroke-width="1.6"/></g>
+    <text x="68" y="476">accepted document → chunks</text>
+    <g transform="translate(320 470)"><rect x="-8" y="-10" width="16" height="20" rx="2.5" fill="#f87171"/><path d="M-3.5 -3.5 l7 7 M3.5 -3.5 l-7 7" stroke="#2a1218" stroke-width="2"/></g>
+    <text x="336" y="476">rejected → quarantine</text>
+    <text x="1160" y="476" text-anchor="end" font-family="ui-monospace,SFMono-Regular,&quot;Cascadia Mono&quot;,Consolas,Menlo,monospace" fill="#94a3b8">chunk_id = sha256(tenant|source|version|chunk_no)</text>
+  </g>
+</svg>

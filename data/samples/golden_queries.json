@@ -1,0 +1,146 @@
+[
+  {
+    "industry": "healthcare",
+    "tenant_id": "acme_health",
+    "groups": [
+      "care_team_cardiology"
+    ],
+    "query": "chest pain troponin aspirin discharge",
+    "expected_source_id": "hc-001"
+  },
+  {
+    "industry": "healthcare",
+    "tenant_id": "beacon_clinic",
+    "groups": [
+      "care_team_pediatrics"
+    ],
+    "query": "toddler vaccination schedule MMR",
+    "expected_source_id": "hc-003"
+  },
+  {
+    "industry": "banking",
+    "tenant_id": "northbank",
+    "groups": [
+      "mortgage_team"
+    ],
+    "query": "documents needed for mortgage pre-approval",
+    "expected_source_id": "bk-002"
+  },
+  {
+    "industry": "banking",
+    "tenant_id": "river_cu",
+    "groups": [
+      "card_services"
+    ],
+    "query": "how long do members have to dispute a card charge",
+    "expected_source_id": "bk-003"
+  },
+  {
+    "industry": "insurance",
+    "tenant_id": "shieldco",
+    "groups": [
+      "claims_adjusters"
+    ],
+    "query": "what is needed to file an auto collision claim",
+    "expected_source_id": "in-001"
+  },
+  {
+    "industry": "insurance",
+    "tenant_id": "harbor_mutual",
+    "groups": [
+      "underwriting"
+    ],
+    "query": "sprinkler certificate for commercial renewal",
+    "expected_source_id": "in-004"
+  },
+  {
+    "industry": "legal",
+    "tenant_id": "lexpartners",
+    "groups": [
+      "matter_m100_team"
+    ],
+    "query": "is a non-compete enforceable in California",
+    "expected_source_id": "lg-001"
+  },
+  {
+    "industry": "legal",
+    "tenant_id": "cityattorneys",
+    "groups": [
+      "matter_m300_team"
+    ],
+    "query": "preserve documents under litigation hold",
+    "expected_source_id": "lg-003"
+  },
+  {
+    "industry": "retail",
+    "tenant_id": "shopnova",
+    "groups": [
+      "support_team"
+    ],
+    "query": "return window for clothing",
+    "expected_source_id": "rt-001"
+  },
+  {
+    "industry": "retail",
+    "tenant_id": "urbanmart",
+    "groups": [
+      "support_team"
+    ],
+    "query": "minimum order for free delivery",
+    "expected_source_id": "rt-003"
+  },
+  {
+    "industry": "manufacturing",
+    "tenant_id": "forgeworks",
+    "groups": [
+      "maintenance"
+    ],
+    "query": "how to lock out the hydraulic press",
+    "expected_source_id": "mf-001"
+  },
+  {
+    "industry": "manufacturing",
+    "tenant_id": "voltgrid",
+    "groups": [
+      "safety"
+    ],
+    "query": "PPE required near switchgear",
+    "expected_source_id": "mf-004"
+  },
+  {
+    "industry": "government",
+    "tenant_id": "state_dmv",
+    "groups": [
+      "public"
+    ],
+    "query": "renew driver license online",
+    "expected_source_id": "gv-001"
+  },
+  {
+    "industry": "government",
+    "tenant_id": "city_planning",
+    "groups": [
+      "caseworkers"
+    ],
+    "query": "notify neighbors before zoning variance hearing",
+    "expected_source_id": "gv-004"
+  },
+  {
+    "industry": "education_hr",
+    "tenant_id": "northstate_univ",
+    "groups": [
+      "course_cs101"
+    ],
+    "query": "penalty for late lab submission",
+    "expected_source_id": "ed-001"
+  },
+  {
+    "industry": "education_hr",
+    "tenant_id": "globex_corp",
+    "groups": [
+      "hr_partners"
+    ],
+    "query": "how many weeks of parental leave",
+    "expected_source_id": "ed-003"
+  }
+]

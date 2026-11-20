@@ -1,0 +1,54 @@
+[project]
+name = "vectordb-schema"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "ashishpatel26", email = "shriganesh.patel@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "ipykernel>=7.4.0",
+    "jupyter>=1.1.1",
+    "numpy>=2.5.5",
+    "pgvector>=0.5.1",
+    "psycopg[binary]>=3.3.9",
+    "pydantic>=2.14.4",
+    "pytest>=9.2.0",
+    "python-dotenv>=1.2.4",
+    "sentence-transformers>=6.3.0",
+]
+
+[project.optional-dependencies]
+pg = [
+    "pgvector>=0.5.1",
+    "psycopg[binary]>=3.3.9",
+]
+qdrant = [
+    "qdrant-client>=1.20.0",
+]
+weaviate = [
+    "weaviate-client>=4.24.1",
+]
+milvus = [
+    "pymilvus>=3.0.3",
+]
+chroma = [
+    "chromadb>=1.5.9",
+]
+lancedb = [
+    "lancedb>=0.41.0",
+    "pandas>=3.1.1",
+    "pyarrow>=26.0.1",
+]
+docs = [
+    "docx2txt>=0.9",
+    "fpdf2>=2.9.0",
+    "langchain-community>=0.4.2",
+    "langchain-text-splitters>=1.1.3",
+    "pypdf>=7.1.1",
+    "python-docx>=1.2.0",
+]
+
+[tool.uv]
+package = false   # no src/ package: all code lives in the notebooks

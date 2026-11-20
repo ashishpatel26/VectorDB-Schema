@@ -1,0 +1,21 @@
+# Milvus standalone (embedded etcd + local storage) for local dev. Podman-friendly.
+# Run from repo root: podman compose -f docker/milvus/docker-compose.yml up -d
+services:
+  milvus:
+    image: docker.io/milvusdb/milvus:v2.6.4
+    container_name: vdb-milvus
+    command: ["milvus", "run", "standalone"]
+    security_opt: ["seccomp=unconfined"]
+    environment:
+      ETCD_USE_EMBED: "true"
+      ETCD_DATA_DIR: /var/lib/milvus/etcd
+      ETCD_CONFIG_PATH: /milvus/configs/embedEtcd.yaml
+      COMMON_STORAGETYPE: local
+      DEPLOY_MODE: STANDALONE
+    ports: ["19530:19530", "9091:9091"]
+    volumes:
+      - milvusdata:/var/lib/milvus
+      - ./embedEtcd.yaml:/milvus/configs/embedEtcd.yaml:ro
+      - ./user.yaml:/milvus/configs/user.yaml:ro
+volumes:
+  milvusdata: {}

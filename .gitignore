@@ -1,0 +1,24 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.env
+data/chroma/
+data/lancedb/
+data/results/
+docker/milvus/volumes/
+.ipynb_checkpoints/
+# Local agent memory, per-notebook system of record, logs
+.remember/
+data/sor/
+*.log
+
+# not published (user choice)
+smoke/
+.vscode/
