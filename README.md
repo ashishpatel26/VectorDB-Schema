@@ -462,7 +462,7 @@ Golden queries: 2 per industry (one per tenant) × 8 industries = 16 queries per
 | DB | Status | hit@1 | hit@5 | p50 latency | Quarantined | Tenant isolation |
 |---|---|---|---|---|---|---|
 | **pgvector** | ✅ done | 1.00 | 1.00 | 4.2 ms | 8/8 | ✅ PASS · Row-Level Security + ACL pre-filter |
-| **Qdrant** | 🛠️ building | – | – | – | – | `is_tenant` payload index + mandatory filter |
+| **Qdrant** | ✅ done | 1.00 | 1.00 | 7.9 ms | 8/8 | ✅ PASS · `is_tenant` payload index + mandatory filter (no server-side RLS) |
 | **Weaviate** | ⏸️ not run (Docker Hub rate limit: `podman login docker.io`) | – | – | – | – | native multi-tenancy (shard per tenant) + ACL pre-filter |
 | **Milvus** | ✅ done | 1.00 | 1.00 | 6.0 ms | 8/8 | ✅ PASS · partition key + tenant/ACL pre-filter |
 | **Chroma** | ✅ done | 1.00 | 1.00 | 6.9 ms | 8/8 | ✅ PASS · ⚠️ filter-only (embedded, no server-side enforcement) |
